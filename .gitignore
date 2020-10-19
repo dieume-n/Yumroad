@@ -1,0 +1,19 @@
+.env
+.flaskenv
+*.pyc
+*.tags*
+
+.cache
+_cache/*
+
+venv
+__pycache__/
+
+# local development
+database.db
+*.db
+*.db-journal
+
+# Visual studio code
+.vscode
+
