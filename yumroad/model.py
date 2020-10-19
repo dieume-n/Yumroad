@@ -9,6 +9,6 @@ class BaseModel(db.Model):
     created = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
     updated = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
 
-    def __save_to_db(self):
+    def save_to_db(self):
         db.session.add(self)
         db.session.commit()
