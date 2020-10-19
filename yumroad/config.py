@@ -5,17 +5,18 @@ class BaseConfig:
     TESTING = False
     DEBUG = False
     SQLALCHEMY_DATABASE_URI = "mysql://root:pwd@localhost:3306"
+    SQLALCHEMY_TRACK_MODIFICATIONS = False
 
 
 class DevConfig(BaseConfig):
     DEBUG = True
-    SQLALCHEMY_DATABASE_URI = "sqlite:/// dev.db"
+    SQLALCHEMY_DATABASE_URI = "sqlite:///dev.db"
     SQLALCHEMY_ECHO = True
 
 
 class TestConfig(BaseConfig):
     TESTING = True
-    SQLALCHEMY_DATABASE_URI = "sqlite:/// test.db"
+    SQLALCHEMY_DATABASE_URI = "sqlite:///test.db"
 
 
 class ProdConfig(BaseConfig):
