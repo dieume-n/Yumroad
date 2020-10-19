@@ -5,6 +5,7 @@ from yumroad.extensions import db, migrate
 
 
 from yumroad.products.views import products_bp
+from yumroad.products.commands import products_cli
 
 
 def create_app(environment_name="dev"):
@@ -18,5 +19,8 @@ def create_app(environment_name="dev"):
 
     # Register Blueprints
     app.register_blueprint(products_bp, url_prefix="/products")
+
+    # Register Commads
+    app.cli.add_command(products_cli)
 
     return app

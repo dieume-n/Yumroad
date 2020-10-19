@@ -1,6 +1,6 @@
+import click
 from flask import Blueprint
 from yumroad.products.models import Product
-
 
 products_bp = Blueprint("products", __name__)
 
@@ -12,4 +12,4 @@ def index():
 
 @products_bp.route("<int:product_id>")
 def details(product_id):
-    pass
+    return "Product details"
