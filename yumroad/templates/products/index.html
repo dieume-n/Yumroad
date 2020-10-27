@@ -1,0 +1,62 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="mb-16">
+    <!--
+  Tailwind UI components require Tailwind CSS v1.8 and the @tailwindcss/ui plugin.
+  Read the documentation to get started: https://tailwindui.com/documentation
+-->
+    <div class="flex flex-col">
+        <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+            <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
+                <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
+                    <table class="min-w-full divide-y divide-gray-200">
+                        <thead>
+                            <tr>
+                                <th
+                                    class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+                                    Name
+                                </th>
+                                <th
+                                    class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+                                    Description
+                                </th>
+                                <th
+                                    class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+                                    Link
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white divide-y divide-gray-200">
+                            {% for product in products %}
+                            <tr>
+                                <td class="px-6 py-4 whitespace-no-wrap">
+                                    <div class="flex items-center">
+                                        <div class="ml-4">
+                                            <div class="text-sm leading-5 font-medium text-gray-900">
+                                                {{ product.name }}
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4 whitespace-no-wrap">
+                                    <div class="text-sm leading-5 text-gray-900">{{ product.description[:100] }}</div>
+                                </td>
+                                <td class="px-6 py-4 whitespace-no-wrap">
+                                    <div class="text-sm leading-5 text-gray-900">
+                                        <a href="{{ url_for('products.details', product_id=product.id) }}">Details</a>
+                                    </div>
+                                </td>
+                            </tr>
+                            {% endfor %}
+
+                            <!-- More rows... -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+{% endblock %}
