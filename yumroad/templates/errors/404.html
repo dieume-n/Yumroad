@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block page_content %}
+<div class="min-h-screen bg-gray-800">
+    <div class="flex h-screen justify-center items-center">
+        <div class="text-center flex flex-col flex-wrap items-center">
+            <img src="{{ url_for('static', filename='img/error-404.svg') }}" alt="404" class="h-56 w-56" />
+            <p class="text-gray-100 text-2xl">You seem lost</p>
+            <p class="text-gray-100 text-xl">The page you're looking for was not found!!!</p>
+            <a href="{{ url_for('products.index') }}"
+                class="text-gray-100 font-semibold text-xl mt-4 rounded bg-purple-500 px-4 py-2 w-auto">
+                Go to Home</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

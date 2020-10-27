@@ -2,8 +2,9 @@
 .flaskenv
 *.pyc
 *.tags*
-
+*.pytest_cache
 .cache
+.coverage
 _cache/*
 
 venv
