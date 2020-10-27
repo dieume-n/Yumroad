@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, render_template
 
 from yumroad.config import configurations
 from yumroad.extensions import db, migrate
@@ -6,6 +6,14 @@ from yumroad.extensions import db, migrate
 
 from yumroad.products.views import products_bp
 from yumroad.products.commands import products_cli
+
+
+def page_not_found(e):
+    return render_template("errors/404.html"), 404
+
+
+def server_error(e):
+    return render_template("errors/500.html"), 500
 
 
 def create_app(environment_name="dev"):
@@ -22,5 +30,9 @@ def create_app(environment_name="dev"):
 
     # Register Commads
     app.cli.add_command(products_cli)
+
+    # Error pages
+    app.register_error_handler(404, page_not_found)
+    app.register_error_handler(500, server_error)
 
     return app
