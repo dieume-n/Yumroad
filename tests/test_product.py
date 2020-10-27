@@ -39,3 +39,9 @@ def test_products_details_page(client, init_database, sample_book):
     response = client.get(url_for("products.details", product_id=sample_book.id))
     assert response.status_code == 200
     assert "Yumroad" in str(response.data)
+
+
+def test_not_found(client, init_database):
+    response = client.get(url_for("products.details", product_id=1))
+    assert response.status_code == 404
+    assert url_for("products.index") in str(response.data)
