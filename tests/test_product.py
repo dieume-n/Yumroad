@@ -33,3 +33,9 @@ def test_products_index_page(client, init_database, sample_book):
 
     expected_link = url_for("products.details", product_id=sample_book.id)
     assert expected_link in str(response.data)
+
+
+def test_products_details_page(client, init_database, sample_book):
+    response = client.get(url_for("products.details", product_id=sample_book.id))
+    assert response.status_code == 200
+    assert "Yumroad" in str(response.data)
