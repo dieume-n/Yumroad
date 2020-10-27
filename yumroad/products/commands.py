@@ -13,8 +13,8 @@ products_cli = AppGroup("products")
 def seed(count):
     """ Seed products """
     print(f"Seeding {count} products")
-    for _ in range(int(count)):
-        product = Product(name=fake.sentence(), description=fake.text()[:150])
+    for i in range(int(count)):
+        product = Product(name=f"Product{i}", description=fake.text()[:150])
         product.save_to_db()
 
     print(f"{count} products seeded")
