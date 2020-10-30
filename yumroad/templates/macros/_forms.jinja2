@@ -1,0 +1,18 @@
+{% macro render_fields(field) %}
+{% set label = kwargs.pop('label', False) %}
+{% set placeholder = kwargs.pop('placeholder', '') %}
+{% if not label %}
+{% set placeholder = field.label.text %}
+{% endif %}
+<label class="block">
+    {% if label %}
+    <span class="text-gray-700">
+        {{ field.label.text }} {% if field.flags.required %} * {% endif %}
+    </span>
+    {% endif %}
+
+    <input class="form-input mt-1 block w-full" name="name" placeholder="Product name...">
+</label>
+
+{% endmacro %}
+

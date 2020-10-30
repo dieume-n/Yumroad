@@ -1,0 +1,22 @@
+{% extends 'layout.jinja2' %}
+
+{% block content %}
+    <div class="container mx-auto max-w-md">
+        <h2 class="text-3xl uppercase">Create a new Product</h2>
+        <div>
+            <form action="" class="mt-4" method="POST">
+                <label class="block">
+                    <span class="text-gray-700">Name</span>
+                    <input class="form-input mt-1 block w-full" name="name" placeholder="Product name...">
+                </label>
+                <label class="block mt-3">
+                    <span class="text-gray-700">Textarea</span>
+                    <textarea class="form-textarea mt-1 block w-full" rows="3" name="description"
+                        placeholder="Enter the description of your product"></textarea>
+                </label>
+                <button type="submit" class="px-2 py-2 bg-purple-500 text-white uppercase mt-4 rounded text-sm">Create
+                    Product</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}

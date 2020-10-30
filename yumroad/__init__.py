@@ -9,11 +9,11 @@ from yumroad.products.commands import products_cli
 
 
 def page_not_found(e):
-    return render_template("errors/404.html"), 404
+    return render_template("errors/404.jinja2"), 404
 
 
 def server_error(e):
-    return render_template("errors/500.html"), 500
+    return render_template("errors/500.jinja2"), 500
 
 
 def create_app(environment_name="dev"):
