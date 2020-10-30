@@ -1,10 +1,12 @@
 {% extends 'layout.jinja2' %}
+{% form "macros/_formhelpers.jinja2" import render_field %}
 
 {% block content %}
     <div class="container mx-auto max-w-md">
         <h2 class="text-3xl uppercase">Create a new Product</h2>
         <div>
             <form action="" class="mt-4" method="POST">
+                {# {{ render_field() }} #}
                 <label class="block">
                     <span class="text-gray-700">Name</span>
                     <input class="form-input mt-1 block w-full" name="name" placeholder="Product name...">

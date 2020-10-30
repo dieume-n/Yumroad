@@ -1,0 +1,28 @@
+{# {% macro render_fields(field) %}
+{% set label = kwargs.pop('label', False) %}
+{% set placeholder = kwargs.pop('placeholder', '') %}
+{% if not label %}
+{% set placeholder = field.label.text %}
+{% endif %}
+<label class="block">
+    {% if label %}
+    <span class="text-gray-700">
+        {{ field.label.text }} {% if field.flags.required %} * {% endif %}
+    </span>
+    {% endif %}
+
+    <input class="form-input mt-1 block w-full" name="name" placeholder="Product name...">
+</label>
+
+{% endmacro %} #}
+
+{% macro render_field(field) %}
+<label class="block">
+    <span class="text-gray-700">{{ field.label }}</span>
+    {{ field(class_=' '.join(['form-input mt-1 block w-full', 'bg-red-500' if field.errors else '']), **kwargs)|safe }}
+    {% for error in field.errors %}
+        <span class="text-sm text-red-500 mt-1">{{ error }}</span>
+    {% endfor %}
+    {# <input class="form-input mt-1 block w-full {% if field.errors %} bg-red-500 {% endif %}" name="name" placeholder="Product name..."> #}
+</label>
+{% endmacro%}
