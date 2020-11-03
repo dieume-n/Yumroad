@@ -105,3 +105,24 @@ def test_edit_product_submission(client, init_database, sample_book):
     assert old_name not in str(response.data)
     assert old_description not in str(response.data)
     assert b"Edit" in response.data
+
+
+def test_invalid_edit_product_submission(client, init_database, sample_book):
+    old_name = sample_book.name
+    old_description = sample_book.description
+    response = client.post(
+        url_for("products.edit", product_id=sample_book.id),
+        data=dict(name="br0", description="is persisted"),
+        follow_redirects=True,
+    )
+
+    assert response.status_code == 200
+    assert b"br0" in response.data
+    assert (
+        b"The product name must be between 4 and 255 characters long" in response.data
+    )
+
+    assert Product.query.get(sample_book.id).description == old_description
+    assert old_description not in str(response.data)
+    assert old_name in str(response.data)
+    assert b"Edit" in response.data
