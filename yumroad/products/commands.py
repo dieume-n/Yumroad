@@ -10,7 +10,7 @@ products_cli = AppGroup("products")
 
 @products_cli.command("seed")
 @click.argument("count")
-def seed(count):
+def seed(count=10):
     """ Seed products """
     print(f"Seeding {count} products")
     for i in range(int(count)):
