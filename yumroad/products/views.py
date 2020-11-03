@@ -1,6 +1,7 @@
 import click
 from flask import Blueprint, render_template, request
 from yumroad.products.models import Product
+from yumroad.products.forms import ProductForm
 
 products_bp = Blueprint("products", __name__)
 
@@ -21,6 +22,8 @@ def details(product_id):
 
 @products_bp.route("create", methods=["GET", "POST"])
 def create():
-    if request.method == "POST":
-        product = Product(name=request.form.)
-    return render_template("products/create.jinja2", title="Create Product")
+    form = ProductForm()
+
+    if form.validate_on_submit():
+        product = Product(name=form.name.data, description=form.description.data)
+    return render_template("products/create.jinja2", title="Create Product", form=form)

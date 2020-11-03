@@ -6,6 +6,7 @@ class BaseConfig:
     DEBUG = False
     SQLALCHEMY_DATABASE_URI = "mysql://root:pwd@localhost:3306"
     SQLALCHEMY_TRACK_MODIFICATIONS = False
+    SECRET_KEY = os.getenv("SECRET_KEY", "mysupersecret")
 
 
 class DevConfig(BaseConfig):
