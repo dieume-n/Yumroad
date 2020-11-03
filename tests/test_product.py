@@ -1,7 +1,6 @@
 import pytest
 from flask import url_for
 
-from yumroad.extensions import db
 from yumroad.products.models import Product
 
 
