@@ -79,3 +79,12 @@ def test_invalid_create_product(client, init_database):
     assert (
         b"The product name must be between 4 and 255 characters long" in response.data
     )
+
+
+def test_edit_page(client, init_database, sample_book):
+    response = client.get(url_for("products.edit", product_id=sample_book.id))
+
+    assert response.status_code == 200
+    assert sample_book.name in str(response.data)
+    assert sample_book.description in str(response.data)
+    assert b"Edit" in response.data
