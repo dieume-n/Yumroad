@@ -23,7 +23,7 @@ class TestConfig(BaseConfig):
 
 
 class ProdConfig(BaseConfig):
-    pass
+    SECRET_KEY = os.getenv("SECRET_KEY")
 
 
 configurations = {"dev": DevConfig, "test": TestConfig, "prod": ProdConfig}
