@@ -53,3 +53,16 @@ def test_create_page(client, init_database):
     assert response.status_code == 200
     assert b"Name" in response.data
     assert b"Create" in response.data
+
+
+def test_create_product(client, init_database):
+    response = client.post(
+        url_for("products.create"),
+        data=dict(name="test product", description="is persisted"),
+        follow_redirects=True,
+    )
+    assert response.status_code == 200
+    assert Product.query.count() == 1
+    assert Product.query.first().name == "test product"
+    assert b"test product" in response.data
+    assert b"Purchase" in response.data
