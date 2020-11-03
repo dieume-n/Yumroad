@@ -81,10 +81,27 @@ def test_invalid_create_product(client, init_database):
     )
 
 
-def test_edit_page(client, init_database, sample_book):
+def test_edit_product_page(client, init_database, sample_book):
     response = client.get(url_for("products.edit", product_id=sample_book.id))
 
     assert response.status_code == 200
     assert sample_book.name in str(response.data)
     assert sample_book.description in str(response.data)
+    assert b"Edit" in response.data
+
+
+def test_edit_product_submission(client, init_database, sample_book):
+    old_name = sample_book.name
+    old_description = sample_book.description
+    response = client.post(
+        url_for("products.edit", product_id=sample_book.id),
+        data=dict(name="test-change", description="is persisted"),
+        follow_redirects=True,
+    )
+
+    assert response.status_code == 200
+    assert "test-change" in str(response.data)
+    assert "is persisted" in str(response.data)
+    assert old_name not in str(response.data)
+    assert old_description not in str(response.data)
     assert b"Edit" in response.data
