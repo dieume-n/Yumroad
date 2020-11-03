@@ -28,7 +28,7 @@ def create():
     if form.validate_on_submit():
         product = Product(name=form.name.data, description=form.description.data)
         product.save_to_db()
-        return redirect(url_for("products.index"))
+        return redirect(url_for("products.show", product_id=product.id))
     return render_template("products/create.jinja2", title="Create Product", form=form)
 
 
