@@ -47,7 +47,7 @@ def test_not_found(client, init_database):
     assert url_for("products.index") in str(response.data)
 
 
-def test_create_page(client, init_database):
+def test_create_product_page(client, init_database):
     response = client.get(url_for("products.create"))
 
     assert response.status_code == 200
@@ -55,7 +55,7 @@ def test_create_page(client, init_database):
     assert b"Create" in response.data
 
 
-def test_create_product(client, init_database):
+def test_create_product_submission(client, init_database):
     response = client.post(
         url_for("products.create"),
         data=dict(name="test product", description="is persisted"),
