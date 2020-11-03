@@ -1,8 +1,9 @@
 from flask_wtf import FlaskForm
 from wtforms.fields import StringField, PasswordField
 from wtforms.fields.html5 import EmailField
+from wtforms.validators import Required, Email, EqualTo, Length, ValidationError
 
-from wtforms.validators import Required, Email, EqualTo, Length
+from yumroad.users.models import User
 
 
 class RegisterForm(FlaskForm):
@@ -17,3 +18,9 @@ class RegisterForm(FlaskForm):
         ],
     )
     confirm = PasswordField("Confirm password", validators=[Required()])
+
+    def validate_email(self, email):
+        user = User.find_by_email(email)
+        if not user:
+            raise ValidationError("This email is already taken")
+        return True

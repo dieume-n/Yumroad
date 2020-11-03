@@ -2,6 +2,7 @@ Flask
 Flask-SQLAlchemy
 Flask-Migrate
 Flask-WTF
+wtforms[email]
 Flask-Login
 Flask-Bcrypt
 
