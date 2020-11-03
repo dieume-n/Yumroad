@@ -66,3 +66,16 @@ def test_create_product(client, init_database):
     assert Product.query.first().name == "test product"
     assert b"test product" in response.data
     assert b"Purchase" in response.data
+
+
+def test_invalid_create_product(client, init_database):
+    response = client.post(
+        url_for("products.create"),
+        data=dict(name="abc", description="invalid product"),
+        follow_redirects=True,
+    )
+
+    assert response.status_code == 200
+    assert (
+        b"The product name must be between 4 and 255 characters long" in response.data
+    )
