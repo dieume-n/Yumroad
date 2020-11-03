@@ -1,7 +1,7 @@
 from flask import Flask, render_template
 
 from yumroad.config import configurations
-from yumroad.extensions import db, migrate, csrf, bcrypt
+from yumroad.extensions import db, migrate, csrf, bcrypt, login_manager
 
 
 from yumroad.products.views import products_bp
@@ -23,6 +23,7 @@ def create_app(environment_name="dev"):
     migrate.init_app(app, db)
     csrf.init_app(app)
     bcrypt.init_app(app)
+    login_manager.init_app(app)
 
     # Register Blueprints
     app.register_blueprint(products_bp, url_prefix="/products")
