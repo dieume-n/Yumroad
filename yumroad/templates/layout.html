@@ -4,6 +4,20 @@
 <header>
     <nav class="flex px-8 justify-between h-16 bg-gray-900 items-center">
         <h1 class="text-gray-100 text-xl font-semibold">Yumroad</h1>
+        <ul class="flex space-x-4">
+            {% if current_user.is_authenticated %}
+            <li class="text-white">{{ current_user.name }}</li>
+            <li class="text-white"><a href="{{ url_for('users.logout') }}">Logout</a></li>
+            {% else %}
+            <li class="text-white">
+                <a href="{{ url_for('users.login') }}">Login</a> 
+            </li>
+            <li class="text-white">
+                <a href="{{ url_for('users.register') }}">Register</a> 
+            </li>
+            {% endif %}
+
+        </ul>
     </nav>
 </header>
 <div class="px-16 mt-10">

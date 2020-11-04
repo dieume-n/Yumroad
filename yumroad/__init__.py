@@ -10,7 +10,7 @@ from yumroad.products.commands import products_cli
 
 
 def page_not_found(e):
-    return render_template("errors/404.jinja2"), 404
+    return render_template("errors/404.html"), 404
 
 
 def create_app(environment_name="dev"):

@@ -1,5 +1,5 @@
 from flask import Blueprint, url_for, render_template, redirect, flash
-from flask_login import current_user, login_user, logout_user
+from flask_login import current_user, login_user, logout_user, login_required
 
 from yumroad.extensions import login_manager
 from yumroad.users.models import User
@@ -25,8 +25,8 @@ def register():
 
 @users_bp.route("/login", methods=["GET", "POST"])
 def login():
-    # if current_user.is_authenticated:
-    #     return redirect(url_for("products.index"))
+    if current_user.is_authenticated:
+        return redirect(url_for("products.index"))
 
     form = LoginForm()
     if form.validate_on_submit():
@@ -34,7 +34,14 @@ def login():
 
         if user and user.check_password(form.password.data):
             login_user(user)
-            flash("You are logged in", category="success")
+            return redirect(url_for("products.index"))
         else:
             flash("Invalid email or password", category="danger")
     return render_template("users/login.html", form=form, title="Login")
+
+
+@login_required
+@users_bp.route("/logout")
+def logout():
+    logout_user()
+    return redirect(url_for("products.index"))
