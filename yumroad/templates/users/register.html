@@ -1,5 +1,5 @@
-{% extends 'base.jinja2' %}
-{% from "macros/_formhelpers.jinja2" import render_field %}
+{% extends 'base.html' %}
+{% from "macros/_formhelpers.html" import render_field %}
 
 {% block page_content %}
 <div class="min-h-screen bg-gray-100">
@@ -14,9 +14,11 @@
                     {{ render_field(form.email, placeholder="Email address...") }}
                     {{ render_field(form.password, placeholder="Password") }}
                     {{ render_field(form.confirm, placeholder="Re-type your password") }}
-
-                    <button type="submit" class="px-3 py-2 bg-gray-900 text-white uppercase mt-4 rounded text-sm">Sign Up
-                    </button>
+                    <div class="flex justify-between items-center">
+                        <button type="submit" class="px-3 py-2 bg-gray-900 text-white uppercase mt-4 rounded text-sm">Sign Up
+                        </button>
+                        <a href="{{ url_for('users.login') }}" class="">Already have an account?</a>
+                    </div>
 
                 </form>
             </div>

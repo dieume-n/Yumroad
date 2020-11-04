@@ -1,8 +1,10 @@
+from flask_login import UserMixin
+
 from yumroad.extensions import db, bcrypt
 from yumroad.model import BaseModel
 
 
-class User(BaseModel):
+class User(BaseModel, UserMixin):
     __tablename__ = "users"
 
     id = db.Column(db.Integer, primary_key=True)

@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms.fields import StringField, PasswordField
+from wtforms.fields import StringField, PasswordField, BooleanField
 from wtforms.fields.html5 import EmailField
 from wtforms.validators import DataRequired, Email, EqualTo, Length, ValidationError
 
@@ -28,3 +28,12 @@ class RegisterForm(FlaskForm):
         if user:
             raise ValidationError("This email is already taken")
         return True
+
+
+class LoginForm(FlaskForm):
+    email = EmailField(
+        "Email address",
+        validators=[DataRequired(), Email("Please provide a valid email address")],
+    )
+    password = PasswordField("Password", validators=[DataRequired()])
+    # remember = BooleanField("Remember me")

@@ -11,14 +11,14 @@ products_bp = Blueprint("products", __name__)
 def index():
     products = Product.query.order_by(desc(Product.updated)).all()
     return render_template(
-        "products/index.jinja2", products=products, title="All Products"
+        "products/index.html", products=products, title="All Products"
     )
 
 
 @products_bp.route("<int:product_id>")
 def show(product_id):
     product = Product.query.get_or_404(product_id)
-    return render_template("products/show.jinja2", product=product, title=product.name)
+    return render_template("products/show.html", product=product, title=product.name)
 
 
 @products_bp.route("create", methods=["GET", "POST"])
@@ -29,7 +29,7 @@ def create():
         product = Product(name=form.name.data, description=form.description.data)
         product.save_to_db()
         return redirect(url_for("products.show", product_id=product.id))
-    return render_template("products/create.jinja2", title="Create Product", form=form)
+    return render_template("products/create.html", title="Create Product", form=form)
 
 
 @products_bp.route("<int:product_id>/edit", methods=["GET", "POST"])
@@ -43,5 +43,5 @@ def edit(product_id):
         product.save_to_db()
         return redirect(url_for("products.show", product_id=product_id))
     return render_template(
-        "products/edit.jinja2", form=form, product=product, title=product.name
+        "products/edit.html", form=form, product=product, title=product.name
     )

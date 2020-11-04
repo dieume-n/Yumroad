@@ -1,11 +1,9 @@
-{% extends 'layout.jinja2' %}
-{% from "macros/_formhelpers.jinja2" import render_field %}
-
-{% block title %} {{ product.name|capitalize }} {% endblock %}
+{% extends 'layout.html' %}
+{% from "macros/_formhelpers.html" import render_field %}
 
 {% block content %}
     <div class="container mx-auto max-w-lg">
-        <h2 class="text-3xl uppercase">Edit {{ product.name }}</h2>
+        <h2 class="text-3xl uppercase">Create a new Product</h2>
         <div>
             <form action="" class="mt-4" method="POST">
                 {{ form.csrf_token }}
@@ -13,7 +11,7 @@
                 {{ render_field(form.name, placeholder="Product name...") }}
                 {{ render_field(form.description, placeholder="Product description...") }}
 
-                <button type="submit" class="px-3 py-2 bg-gray-900 text-white uppercase mt-4 rounded text-sm">Update
+                <button type="submit" class="px-3 py-2 bg-gray-900 text-white uppercase mt-4 rounded text-sm">Create
                     Product</button>
             </form>
         </div>
