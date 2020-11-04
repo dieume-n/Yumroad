@@ -17,7 +17,10 @@ class User(BaseModel):
 
     @classmethod
     def find_by_email(cls, email):
-        return cls.query.filter_by(email=email).first()
+        user = cls.query.filter_by(email=email).first()
+        if not user:
+            return False
+        return user
 
     def check_password(self, password):
         if not bcrypt.check_password_hash(self.password, password):
