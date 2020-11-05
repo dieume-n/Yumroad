@@ -1,6 +1,7 @@
 import click
 from sqlalchemy import desc
 from flask import Blueprint, render_template, request, redirect, url_for
+from flask_login import login_required
 from yumroad.products.models import Product
 from yumroad.products.forms import ProductForm
 

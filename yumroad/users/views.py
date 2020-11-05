@@ -16,6 +16,7 @@ def load_user(user_id):
 @login_manager.unauthorized_handler
 def unauthorized():
     session["after_login"] = request.url
+    flash("You need to login", "warning")
     return redirect(url_for("users.login"))
 
 
