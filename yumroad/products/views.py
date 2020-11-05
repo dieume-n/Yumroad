@@ -23,6 +23,7 @@ def show(product_id):
 
 
 @products_bp.route("create", methods=["GET", "POST"])
+# @login_required
 def create():
     form = ProductForm()
 

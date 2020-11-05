@@ -33,9 +33,8 @@ def register():
         next = request.args.get("next")
         if not is_safe_url(next):
             return flask.abort(400)
-
         return redirect(next or url_for("products.index"))
-        # return redirect(session.get("after_login") or url_for("products.index"))
+
     return render_template("users/register.html", form=form, title="Resgister")
 
 
