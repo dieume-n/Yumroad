@@ -13,6 +13,8 @@ VALID_REGISTER_PARAMS = {
     "confirm": EXAMPLE_PASSWORD,
 }
 
+VALID_LOGIN_PARAMS = {"email": EXAMPLE_EMAIL, "password": EXAMPLE_PASSWORD}
+
 
 def create_user(name=EXAMPLE_NAME, email=EXAMPLE_EMAIL, password=EXAMPLE_PASSWORD):
     user = User(name=name, email=email, password=password)
@@ -83,3 +85,25 @@ def test_get_login(client):
     assert b"Login" in response.data
     assert b"Email address" in response.data
     assert b"Password" in response.data
+
+
+def test_post_login(client, init_database):
+    user = create_user()
+    response = client.post(
+        url_for("users.login"), data=VALID_LOGIN_PARAMS, follow_redirects=True
+    )
+
+    assert response.status_code == 200
+    assert b"Logout" in response.data
+    assert user.name in str(response.data)
+
+
+def test_post_invalid_login(client, init_database):
+    user = create_user()
+    invalid_data = VALID_LOGIN_PARAMS.copy()
+    invalid_data["password"] = "invalid"
+    response = client.post(
+        url_for("users.login"), data=invalid_data, follow_redirects=True
+    )
+    assert response.status_code == 200
+    assert b"Invalid email or password" in response.data
