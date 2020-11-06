@@ -69,7 +69,9 @@ def test_post_register_with_existing_user(client, init_database):
     assert b"This email is already taken" in response.data
 
 
-def test_register_logged_in_user(client, init_database, authenticated_request):
-    response = client.get(url_for("users.login"), follow_redirects=True)
+def test_register_already_logged_in_user(client, init_database, authenticated_request):
+    response = client.post(
+        url_for("users.register"), data=VALID_REGISTER_PARAMS, follow_redirects=True
+    )
     assert response.status_code == 200
     assert b"You are already logged in" in response.data
