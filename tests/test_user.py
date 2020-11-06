@@ -46,3 +46,15 @@ def test_post_register(client, init_database):
     assert user.name == VALID_REGISTER_PARAMS["name"]
     assert user.email == VALID_REGISTER_PARAMS["email"]
     assert user.password != VALID_REGISTER_PARAMS["password"]
+
+
+def test_post_invalid_register(client, init_database):
+    invalid_data = VALID_REGISTER_PARAMS.copy()
+    invalid_data["email"] = "abc@example"
+    response = client.post(
+        url_for("users.register", data=invalid_data, follow_redirects=True)
+    )
+
+    assert response.status_code == 200
+    assert User.query.count() == 0
+    # assert "Please provide a valid email address" in str(response.data)
