@@ -1,5 +1,5 @@
 import pytest
-
+from flask import url_for
 from yumroad import create_app
 from yumroad.extensions import db
 from yumroad.users.models import User

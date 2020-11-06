@@ -46,7 +46,7 @@ def test_not_found(client, init_database):
     assert url_for("products.index") in str(response.data)
 
 
-def test_create_product_page(client, init_database):
+def test_create_product_page(client, init_database, authenticated_request):
     response = client.get(url_for("products.create"))
 
     assert response.status_code == 200
@@ -54,7 +54,7 @@ def test_create_product_page(client, init_database):
     assert b"Create" in response.data
 
 
-def test_create_product_submission(client, init_database):
+def test_create_product_submission(client, init_database, authenticated_request):
     response = client.post(
         url_for("products.create"),
         data=dict(name="test product", description="is persisted"),
@@ -67,7 +67,7 @@ def test_create_product_submission(client, init_database):
     assert b"Purchase" in response.data
 
 
-def test_invalid_create_product(client, init_database):
+def test_invalid_create_product(client, init_database, authenticated_request):
     response = client.post(
         url_for("products.create"),
         data=dict(name="abc", description="invalid product"),
@@ -80,7 +80,7 @@ def test_invalid_create_product(client, init_database):
     )
 
 
-def test_edit_product_page(client, init_database, sample_book):
+def test_edit_product_page(client, init_database, sample_book, authenticated_request):
     response = client.get(url_for("products.edit", product_id=sample_book.id))
 
     assert response.status_code == 200
@@ -89,7 +89,9 @@ def test_edit_product_page(client, init_database, sample_book):
     assert b"Edit" in response.data
 
 
-def test_edit_product_submission(client, init_database, sample_book):
+def test_edit_product_submission(
+    client, init_database, sample_book, authenticated_request
+):
     old_name = sample_book.name
     old_description = sample_book.description
     response = client.post(
@@ -106,7 +108,9 @@ def test_edit_product_submission(client, init_database, sample_book):
     assert b"Edit" in response.data
 
 
-def test_invalid_edit_product_submission(client, init_database, sample_book):
+def test_invalid_edit_product_submission(
+    client, init_database, sample_book, authenticated_request
+):
     old_name = sample_book.name
     old_description = sample_book.description
     response = client.post(
