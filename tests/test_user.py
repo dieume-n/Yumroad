@@ -75,3 +75,11 @@ def test_register_already_logged_in_user(client, init_database, authenticated_re
     )
     assert response.status_code == 200
     assert b"You are already logged in" in response.data
+
+
+def test_get_login(client):
+    response = client.get(url_for("users.login"))
+    assert response.status_code == 200
+    assert b"Login" in response.data
+    assert b"Email address" in response.data
+    assert b"Password" in response.data
