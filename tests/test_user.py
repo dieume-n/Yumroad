@@ -107,3 +107,9 @@ def test_post_invalid_login(client, init_database):
     )
     assert response.status_code == 200
     assert b"Invalid email or password" in response.data
+
+
+def test_already_logged_in_user(client, init_database, authenticated_request):
+    response = client.get(url_for("users.login"), follow_redirects=True)
+    assert response.status_code == 200
+    assert b"You are already logged in" in response.data
