@@ -52,9 +52,18 @@ def test_post_invalid_register(client, init_database):
     invalid_data = VALID_REGISTER_PARAMS.copy()
     invalid_data["email"] = "abc@example"
     response = client.post(
-        url_for("users.register", data=invalid_data, follow_redirects=True)
+        url_for("users.register"), data=invalid_data, follow_redirects=True
     )
 
     assert response.status_code == 200
     assert User.query.count() == 0
-    # assert "Please provide a valid email address" in str(response.data)
+    assert b"Please provide a valid email address" in response.data
+
+
+def test_post_register_with_existing_user(client, init_database):
+    user = create_user()
+    response = client.post(
+        url_for("users.register"), data=VALID_REGISTER_PARAMS, follow_redirects=True
+    )
+    assert response.status_code == 200
+    assert b"This email is already taken" in response.data
