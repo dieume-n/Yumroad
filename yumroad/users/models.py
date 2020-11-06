@@ -12,6 +12,8 @@ class User(BaseModel, UserMixin):
     email = db.Column(db.String(255), unique=True, index=True)
     password = db.Column(db.String(255))
 
+    store = db.relationship("Store", uselist=False, back_populates="owner")
+
     def __init__(self, name, email, password):
         self.name = name.title()
         self.email = email.lower().strip()

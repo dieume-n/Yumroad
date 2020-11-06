@@ -10,6 +10,9 @@ class Product(BaseModel):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(255), nullable=False)
     description = db.Column(db.String(150), nullable=True)
+    store_id = db.Column(db.Integer, db.ForeignKey("stores.id"))
+
+    store = db.relationship("Store", uselist=False, back_populates="products")
 
     @validates("name")
     def validate_name(self, key, name):
