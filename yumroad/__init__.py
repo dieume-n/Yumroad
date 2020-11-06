@@ -6,6 +6,7 @@ from yumroad.extensions import db, migrate, csrf, bcrypt, login_manager
 
 from yumroad.products.views import products_bp
 from yumroad.users.views import users_bp
+from yumroad.stores.views import stores_bp
 from yumroad.products.commands import products_cli
 
 
@@ -28,6 +29,7 @@ def create_app(environment_name="dev"):
     # Register Blueprints
     app.register_blueprint(products_bp, url_prefix="/products")
     app.register_blueprint(users_bp)
+    app.register_blueprint(stores_bp)
 
     # Register Commads
     app.cli.add_command(products_cli)
