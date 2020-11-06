@@ -96,6 +96,7 @@ def test_post_login(client, init_database):
     assert response.status_code == 200
     assert b"Logout" in response.data
     assert user.name in str(response.data)
+    assert f"Welcome {user.name}" in str(response.data)
 
 
 def test_post_invalid_login(client, init_database):
@@ -113,3 +114,12 @@ def test_already_logged_in_user(client, init_database, authenticated_request):
     response = client.get(url_for("users.login"), follow_redirects=True)
     assert response.status_code == 200
     assert b"You are already logged in" in response.data
+
+
+def test_logout_user(client, init_database, authenticated_request):
+    user = User.query.first()
+    response = client.get(url_for("users.logout"), follow_redirects=True)
+    assert response.status_code == 200
+    assert user.name not in str(response.data)
+    assert url_for("users.login") in str(response.data)
+    assert url_for("users.register") in str(response.data)
