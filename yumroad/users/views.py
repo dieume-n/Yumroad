@@ -21,7 +21,7 @@ def load_user(user_id):
 def register():
     if current_user.is_authenticated:
         flash("You are already logged in", "info")
-        return redirect(url_for("product.index"))
+        return redirect(url_for("products.index"))
 
     form = RegisterForm()
     if form.validate_on_submit():
@@ -42,7 +42,7 @@ def register():
 def login():
     if current_user.is_authenticated:
         flash("You are already logged in", "info")
-        return redirect(url_for("product.index"))
+        return redirect(url_for("products.index"))
 
     form = LoginForm()
     if form.validate_on_submit():
