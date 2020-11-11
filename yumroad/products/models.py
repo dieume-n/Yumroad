@@ -2,6 +2,7 @@ from sqlalchemy.orm import validates
 
 from yumroad.extensions import db
 from yumroad.model import BaseModel
+from yumroad.stores.models import Store
 
 
 class Product(BaseModel):
@@ -10,7 +11,7 @@ class Product(BaseModel):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(255), nullable=False)
     description = db.Column(db.String(150), nullable=True)
-    store_id = db.Column(db.Integer, db.ForeignKey("stores.id"))
+    store_id = db.Column(db.Integer, db.ForeignKey(Store.id), nullable=False)
 
     store = db.relationship("Store", uselist=False, back_populates="products")
 
