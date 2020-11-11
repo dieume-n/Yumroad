@@ -13,10 +13,18 @@ class Store(BaseModel):
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(150), unique=True, index=True)
+    slug = db.Column(db.String(255))
     user_id = db.Column(db.Integer, db.ForeignKey(User.id), nullable=False)
 
     products = db.relationship("Product", back_populates="store")
     owner = db.relationship("User", uselist=False, back_populates="store")
+
+    @classmethod
+    def find_by_slug(cls, slug):
+        store = cls.query.filter_by(slug=slug).first()
+        if not store:
+            return False
+        return store
 
     @validates("name")
     def validate_name(self, key, name):
