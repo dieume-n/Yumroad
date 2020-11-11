@@ -5,6 +5,7 @@ Flask-WTF
 wtforms[email]
 Flask-Login
 Flask-Bcrypt
+python-slugify
 
 
 pytest
