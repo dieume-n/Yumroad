@@ -4,6 +4,7 @@ from flask_login import current_user, login_user, logout_user, login_required
 from yumroad.extensions import login_manager
 from yumroad.helpers import is_safe_url
 from yumroad.users.models import User
+from yumroad.stores.models import Store
 from yumroad.users.forms import RegisterForm, LoginForm
 
 users_bp = Blueprint("users", __name__)
@@ -27,6 +28,8 @@ def register():
     if form.validate_on_submit():
         user = User(form.name.data, form.email.data, form.password.data)
         user.save_to_db()
+        store = Store(name=form.store.data, owner=user)
+        store.save_to_db()
 
         login_user(user)
         flash("Registration successful", "success")
