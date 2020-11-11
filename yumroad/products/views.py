@@ -1,7 +1,7 @@
 import click
 from sqlalchemy import desc
 from flask import Blueprint, render_template, request, redirect, url_for
-from flask_login import login_required
+from flask_login import login_required, current_user
 from yumroad.products.models import Product
 from yumroad.products.forms import ProductForm
 
@@ -28,7 +28,11 @@ def create():
     form = ProductForm()
 
     if form.validate_on_submit():
-        product = Product(name=form.name.data, description=form.description.data)
+        product = Product(
+            name=form.name.data,
+            description=form.description.data,
+            store=current_user.store,
+        )
         product.save_to_db()
         return redirect(url_for("products.show", product_id=product.id))
     return render_template("products/create.html", title="Create Product", form=form)
