@@ -1,0 +1,17 @@
+{% macro store_card(store) %}
+<div class="bg-white rounded flex flex-col  shadow-md p-5 overflow-hidden h-48">
+    <h1 class="text-xl text-gray-900 font-normal py-4 {% if not store.description %} flex-1 {% endif %}">{{ store.name }}</h1>
+    {% if store.description %}
+        <div class="flex-1 text-gray-700">
+            {{ store.description }}
+        </div>
+    {% endif %}
+    <div class="flex items-center justify-between">
+        <div class="flex items-center">
+            <img alt="Placeholder" class="block rounded-full" src="https://picsum.photos/32/32/?random">
+            <p class="ml-2 text-sm">By: {{ store.owner.name }}</p>
+        </div>
+        <a href="{{ url_for('stores.show', store_slug=store.slug) }}" class="hover:underline">View Products</a>
+    </div>
+</div>
+{% endmacro %}
