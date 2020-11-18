@@ -14,6 +14,7 @@ class Store(BaseModel):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(150), unique=True, index=True)
     slug = db.Column(db.String(255))
+    description = db.Column(db.String(255), nullable=True)
     user_id = db.Column(db.Integer, db.ForeignKey(User.id), nullable=False)
 
     products = db.relationship("Product", back_populates="store")
