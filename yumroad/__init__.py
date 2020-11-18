@@ -27,7 +27,7 @@ def create_app(environment_name="dev"):
     login_manager.init_app(app)
 
     # Register Blueprints
-    app.register_blueprint(stores_bp)
+    app.register_blueprint(stores_bp, url_prefix="/stores")
     app.register_blueprint(users_bp)
     app.register_blueprint(products_bp, url_prefix="/products")
 
@@ -36,5 +36,9 @@ def create_app(environment_name="dev"):
 
     # Error pages
     app.register_error_handler(404, page_not_found)
+
+    @app.route("/")
+    def index():
+        return render_template("layoutv2.html")
 
     return app
