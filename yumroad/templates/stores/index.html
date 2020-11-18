@@ -1,11 +1,21 @@
 {% extends "layout.html" %}
+{% from "macros/_card.html" import store_card %}
 {% block content %}
-Stores list
-<ul>
+<div>
+    <h1 class="text-2xl font-medium">Available stores</h1>
+</div>
+<div class="mt-4 flex flex-wrap">
+    {% for store in stores %}
+    <div class="w-full md:w-1/4 px-3 pb-6">
+        {{ store_card(store) }}
+    </div>       
+    {% endfor %}
+</div>
+{# <ul>
     {% for store in stores %}
         <li>
             <a href="{{ url_for('stores.show', store_slug=store.slug) }}">{{ store.name }}</a>
         </li>
     {% endfor %}
-</ul>
+</ul> #}
 {% endblock %}
