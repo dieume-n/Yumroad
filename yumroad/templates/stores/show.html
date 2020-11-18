@@ -1,0 +1,12 @@
+{% extends "layout.html" %}
+{% block content %}
+<div>
+    <h1 class="text-xl font-medium">List of products in <span class="bg-teal-500 px-2 py-1 text-white rounded">{{ store.name }}</span> store</h1>
+    <ul>
+        {% for product in store.products %}
+            <li>{{ product.name }}</li>
+        {% endfor %}
+    </ul>
+
+</div>
+{% endblock %}
