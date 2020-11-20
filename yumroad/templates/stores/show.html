@@ -1,8 +1,8 @@
 {% extends "layout.html" %}
 {% from "macros/_product-card.html" import product_card %}
 {% block content %}
-<div>
-    <h1 class="text-xl font-medium">List of products in <span class="bg-teal-500 px-2 py-1 text-white rounded">{{ store.name }}</span> store</h1>
+<div class="mt-10">
+    <h1 class="text-3xl font-medium">{{ store.name }}</h1>
     <div class="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 mt-6">
         {% for product in store.products %}
             {{ product_card(product) }}
