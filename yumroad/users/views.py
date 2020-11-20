@@ -28,7 +28,7 @@ def register():
     if form.validate_on_submit():
         user = User(form.name.data, form.email.data, form.password.data)
         user.save_to_db()
-        store = Store(name=form.store.data, owner=user)
+        store = Store(name=form.store.data.title(), owner=user)
         store.save_to_db()
 
         login_user(user)

@@ -1,8 +1,10 @@
 {% extends 'layout.html' %}
 {% block content %}
+<div class="mt-10">
 <h2 class="text-xl">{{ product.name }}</h2>
+<img src="{{ url_for('static', filename=product.picture) }}" alt="" srcset="">
 <p>{{ product.description }}</p>
-
+{{ product.picture_url }}
 <div>Purchase</div>
 
 <div class="mt-4">
@@ -15,5 +17,6 @@
     
 
 
+</div>
 </div>
 {% endblock %}

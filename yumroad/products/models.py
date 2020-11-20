@@ -12,6 +12,8 @@ class Product(BaseModel):
     name = db.Column(db.String(255), nullable=False)
     description = db.Column(db.String(150), nullable=True)
     store_id = db.Column(db.Integer, db.ForeignKey(Store.id), nullable=False)
+    price_cents = db.Column(db.Integer)
+    picture_url = db.Column(db.String, default="default.png")
 
     store = db.relationship("Store", uselist=False, back_populates="products")
 
@@ -22,3 +24,7 @@ class Product(BaseModel):
                 "The name of the product must be greater than 3 characters long"
             )
         return name
+
+    @property
+    def picture(self):
+        return f"img/{self.picture_url}"

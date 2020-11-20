@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: 0e29f34b00fd
+Revision ID: 41921ec53f01
 Revises: 
-Create Date: 2020-11-11 11:59:03.928676
+Create Date: 2020-11-20 18:17:37.894081
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '0e29f34b00fd'
+revision = '41921ec53f01'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -25,7 +25,7 @@ def upgrade():
     sa.Column('name', sa.String(length=255), nullable=True),
     sa.Column('email', sa.String(length=255), nullable=True),
     sa.Column('password', sa.String(length=255), nullable=True),
-    sa.PrimaryKeyConstraint('id')
+    sa.PrimaryKeyConstraint('id', name=op.f('pk_users'))
     )
     with op.batch_alter_table('users', schema=None) as batch_op:
         batch_op.create_index(batch_op.f('ix_users_email'), ['email'], unique=True)
@@ -35,9 +35,11 @@ def upgrade():
     sa.Column('updated', sa.DateTime(), nullable=True),
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('name', sa.String(length=150), nullable=True),
+    sa.Column('slug', sa.String(length=255), nullable=True),
+    sa.Column('description', sa.String(length=255), nullable=True),
     sa.Column('user_id', sa.Integer(), nullable=False),
-    sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
-    sa.PrimaryKeyConstraint('id')
+    sa.ForeignKeyConstraint(['user_id'], ['users.id'], name=op.f('fk_stores_user_id_users')),
+    sa.PrimaryKeyConstraint('id', name=op.f('pk_stores'))
     )
     with op.batch_alter_table('stores', schema=None) as batch_op:
         batch_op.create_index(batch_op.f('ix_stores_name'), ['name'], unique=True)
@@ -49,8 +51,10 @@ def upgrade():
     sa.Column('name', sa.String(length=255), nullable=False),
     sa.Column('description', sa.String(length=150), nullable=True),
     sa.Column('store_id', sa.Integer(), nullable=False),
-    sa.ForeignKeyConstraint(['store_id'], ['stores.id'], ),
-    sa.PrimaryKeyConstraint('id')
+    sa.Column('price_cents', sa.Integer(), nullable=True),
+    sa.Column('picture_url', sa.String(), nullable=True),
+    sa.ForeignKeyConstraint(['store_id'], ['stores.id'], name=op.f('fk_products_store_id_stores')),
+    sa.PrimaryKeyConstraint('id', name=op.f('pk_products'))
     )
     # ### end Alembic commands ###
 

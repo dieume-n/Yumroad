@@ -17,7 +17,7 @@ naming_convention = {
 }
 
 db = SQLAlchemy(metadata=MetaData(naming_convention=naming_convention))
-migrate = Migrate()
+migrate = Migrate(render_as_batch=True)
 fake = Faker("en_US")
 csrf = CSRFProtect()
 bcrypt = Bcrypt()
