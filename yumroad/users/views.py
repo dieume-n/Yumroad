@@ -52,7 +52,7 @@ def login():
         user = User.find_by_email(form.email.data)
 
         if user and user.check_password(form.password.data):
-            login_user(user)
+            login_user(user, remember=form.remember.data)
             flash(f"Welcome {user.name}", "success")
             next = request.args.get("next")
             if not is_safe_url(next):

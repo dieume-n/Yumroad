@@ -5,16 +5,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="author" content="Luteranya Nyange">
-    <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tailwindcss/ui@latest/dist/tailwind-ui.min.css">
-    <link rel="stylesheet" href="https://unpkg.com/@tailwindcss/custom-forms@^0.2/dist/custom-forms.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/tailwind-ui.min.css') }}">
+
+    {# <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet"> #}
+    {# <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tailwindcss/ui@latest/dist/tailwind-ui.min.css"> #}
+    {# <link rel="stylesheet" href="https://unpkg.com/@tailwindcss/custom-forms@^0.2/dist/custom-forms.min.css"> #}
     
     <title>{% if not title %} Yumroad {% else %} {{ title }} {% endif %}</title>
 </head>
 
 <body class="antialiased bg-gray-100">
     {% block page_content %} {% endblock %}
-    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.7.3/dist/alpine.min.js" ></script>
+    {# <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.7.3/dist/alpine.min.js" ></script> #}
+    <script src="{{ url_for('static', filename='js/alpine.min.js') }}" ></script>
 </body>
 
 </html>

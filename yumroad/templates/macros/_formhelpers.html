@@ -2,10 +2,10 @@
 {% set type = field.type.replace('Field', '').lower() %}
 {% set field_type = 'input' if type == "string" else type %}
 
-<label class="block mt-4">
+<label class="block mt-6">
     <span class="text-gray-700">{{ field.label }}</span>
    
-    {{ field(class_=' '.join(['form-input mt-1 block w-full', 'border-red-400 text-red-800' if field.errors else '']), **kwargs)|safe }}
+    {{ field(class_=' '.join(['form-input mt-1 block w-full ', 'border-red-400 text-red-800' if field.errors else '']), **kwargs)|safe }}
     {% for error in field.errors %}
         <span class="text-sm italic text-red-600 mt-1">{{ error }}</span>
     {% endfor %}

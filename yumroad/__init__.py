@@ -1,8 +1,7 @@
 from flask import Flask, render_template
 
 from yumroad.config import configurations
-from yumroad.extensions import db, migrate, csrf, bcrypt, login_manager
-
+from yumroad.extensions import db, migrate, csrf, bcrypt, login_manager, assets
 
 from yumroad.users.views import users_bp
 from yumroad.stores.views import stores_bp
@@ -15,7 +14,6 @@ def page_not_found(e):
 
 
 def create_app(environment_name="dev"):
-
     app = Flask(__name__)
     app.config.from_object(configurations[environment_name])
 
@@ -25,6 +23,7 @@ def create_app(environment_name="dev"):
     csrf.init_app(app)
     bcrypt.init_app(app)
     login_manager.init_app(app)
+    assets.init_app(app)
 
     # Register Blueprints
     app.register_blueprint(stores_bp, url_prefix="/stores")

@@ -43,4 +43,4 @@ class LoginForm(FlaskForm):
         validators=[DataRequired(), Email("Please provide a valid email address")],
     )
     password = PasswordField("Password", validators=[DataRequired()])
-    # remember = BooleanField("Remember me")
+    remember = BooleanField("Remember me")

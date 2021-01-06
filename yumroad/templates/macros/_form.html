@@ -1,0 +1,21 @@
+{% macro render_field(field) %}
+    {% set type = field.type.replace('Field', '').lower() %}
+    {% set field_type = 'input' if type == "string" else type %}
+    <div>
+        <label for="email" class="block text-sm font-medium leading-5 text-gray-700">
+            {{ field.label }}
+        </label>
+        <div class="mt-1 rounded-md shadow-sm">
+            {{ field(
+                class="".join([
+                    'appearance-none block w-full px-3 py-2 border rounded-md placeholder-gray-400
+                    focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150
+                    ease-in-out sm:text-sm sm:leading-5 ', 'border-red-500 text-red-500' if field.errors else 'border-gray-300']),
+                    **kwargs)|safe
+                    }}
+        </div>
+        {% for error in field.errors %}
+            <span class="text-xs text-red-600 mt-1">{{ error }}</span>
+        {% endfor %}
+    </div>
+{% endmacro %}

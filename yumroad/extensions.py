@@ -4,6 +4,7 @@ from flask_bcrypt import Bcrypt
 from flask_login import LoginManager
 from flask_wtf.csrf import CSRFProtect
 from sqlalchemy import MetaData
+from flask_assets import Environment, Bundle
 
 from faker import Faker
 
@@ -22,3 +23,4 @@ fake = Faker("en_US")
 csrf = CSRFProtect()
 bcrypt = Bcrypt()
 login_manager = LoginManager()
+assets = Environment()

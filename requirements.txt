@@ -5,7 +5,27 @@ Flask-WTF
 wtforms[email]
 Flask-Login
 Flask-Bcrypt
+Flask-Mail
 python-slugify
+Flask-Assets
+cssmin
+jsmin
+sentry-sdk[flask]
+fakeredis
+
+stripe
+vcrpy
+
+gunicorn
+
+flask-debugtoolbar
+Flask-RQ2
+rq-dashboard
+rq==1.4.3
+
+
+
+gunicorn
 
 
 pytest
